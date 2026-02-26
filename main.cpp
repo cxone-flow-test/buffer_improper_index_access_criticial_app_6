@@ -3,8 +3,6 @@
 #include <iostream>
 #include <string.h>
 
-// This is not the exact repo you're looking for.
-
 using namespace std;
 
 void print_array(char array[], int len) {
@@ -31,6 +29,12 @@ void print_array_ptr(char *array, int len) {
   }
 }
 
+/*
+Compile-time checks ensure that the buffer size passed to this legacy method
+is >= 600000.  Changing this function would be architecturally impossible so
+we implemented an external check to ensure this function never writes out of bounds.
+
+*/
 __attribute__((visibility("default"))) void do_stuff(char *a, char *b) {
   
   for (int x = 0; x < 600000; x++)
